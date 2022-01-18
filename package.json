@@ -1,0 +1,26 @@
+{
+  "name": "pokedex",
+  "version": "1.0.0",
+  "description": "Find more about Pokemon with this Pokedex",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Readpato/pokedex.git"
+  },
+  "keywords": [
+    "pokemon",
+    "pokedex"
+  ],
+  "author": "Patrick Raedler",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Readpato/pokedex/issues"
+  },
+  "homepage": "https://github.com/Readpato/pokedex#readme",
+  "dependencies": {
+    "bootstrap": "^5.1.3"
+  }
+}
