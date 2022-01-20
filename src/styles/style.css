@@ -19,20 +19,33 @@ main .pokemon-description {
   padding-left: 1rem;
 }
 
-main .next-previous-buttons-container {
+main .lower-transition-buttons-container {
   width: 30%;
+  margin: auto;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  -ms-flex-item-align: center;
-      align-self: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
-main .next-previous-buttons-container .previous-button,
-main .next-previous-buttons-container .next-button {
+main .lower-transition-buttons-container .lower-previous-button,
+main .lower-transition-buttons-container .lower-next-button {
+  background-color: #6adada;
+  border: none;
+}
+
+main .upper-transition-buttons-container {
+  width: 30%;
+  display: none;
+}
+
+main .upper-transition-buttons-container .upper-previous-button,
+main .upper-transition-buttons-container .upper-next-button {
   background-color: #6adada;
   border: none;
 }
@@ -40,6 +53,21 @@ main .next-previous-buttons-container .next-button {
 main .pokemon-card:hover {
   -webkit-transform: scale(0.97);
           transform: scale(0.97);
+}
+
+@media screen and (max-width: 768px) {
+  main .upper-transition-buttons-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    margin: auto;
+  }
 }
 
 * {

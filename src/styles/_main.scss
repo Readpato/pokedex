@@ -12,13 +12,23 @@ main {
     padding-left: 1rem;
   }
 
-  .next-previous-buttons-container {
+  .lower-transition-buttons-container {
     width: 30%;
+    margin: auto;
     display: flex;
     justify-content: space-between;
-    align-self: center;
-    .previous-button,
-    .next-button {
+    align-items: center;
+    .lower-previous-button,
+    .lower-next-button {
+      background-color: $button-color;
+      border: none;
+    }
+  }
+  .upper-transition-buttons-container {
+    width: 30%;
+    display: none;
+    .upper-previous-button,
+    .upper-next-button {
       background-color: $button-color;
       border: none;
     }
@@ -28,6 +38,12 @@ main {
     transform: scale(0.97);
   }
 
-  @media screen and (max-width: 670px) {
+  @media screen and (max-width: 768px) {
+    .upper-transition-buttons-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: auto;
+    }
   }
 }
