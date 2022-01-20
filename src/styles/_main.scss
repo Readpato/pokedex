@@ -1,0 +1,49 @@
+main {
+  .pokemon-card {
+    margin-bottom: 0.25rem;
+    width: 14em;
+    background-color: rgba(255, 255, 255, 0.8);
+    transition: transform 0.5s ease;
+    border-radius: 1rem;
+  }
+  .pokemon-description {
+    list-style-image: url("../images/pokeball.svg");
+    text-align: left;
+    padding-left: 1rem;
+  }
+
+  .lower-transition-buttons-container {
+    width: 30%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .lower-previous-button,
+    .lower-next-button {
+      background-color: $button-color;
+      border: none;
+    }
+  }
+  .upper-transition-buttons-container {
+    width: 30%;
+    display: none;
+    .upper-previous-button,
+    .upper-next-button {
+      background-color: $button-color;
+      border: none;
+    }
+  }
+
+  .pokemon-card:hover {
+    transform: scale(0.97);
+  }
+
+  @media screen and (max-width: 768px) {
+    .upper-transition-buttons-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: auto;
+    }
+  }
+}
