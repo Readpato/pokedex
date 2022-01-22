@@ -26,7 +26,6 @@ function loadSinglePokemon(pokemonURL) {
       return api_response.json();
     })
     .then((api_responseJSON) => {
-      console.log(api_responseJSON);
       return createPokemonCard(api_responseJSON);
     })
     .catch((error) => console.error(error));
@@ -49,10 +48,15 @@ function createPokemonCard(pokemon) {
   const $pokemonHeight = document.createElement("li");
 
   $pokemonImage.src = pokemon.sprites.front_default;
-  $pokemonImage.alt = `An image depicting the pokemon ${pokemon.name}`;
+  $pokemonImage.alt = `An image depicting the front part of pokemon ${pokemon.name}`;
   $pokemonTitle.textContent = pokemon.name;
   $pokemonNumber.textContent = `Number: ${pokemon.id}`;
-  $pokemonType.textContent = `Type: ${pokemon.types[0].type}`;
+  if (pokemon.types.length === 2) {
+    $pokemonType.textContent = `Type: ${pokemon.types[0].type.name} - ${pokemon.types[1].type.name}`;
+  } else {
+    $pokemonType.textContent = `Type: ${pokemon.types[0].type.name}`;
+  }
+
   $pokemonWeight.textContent = `Weight: ${pokemon.weight}`;
   $pokemonHeight.textContent = `Height: ${pokemon.height}`;
 
