@@ -48,13 +48,19 @@ function createPokemonCard(pokemon) {
   const $pokemonHeight = document.createElement("li");
 
   $pokemonImage.src = pokemon.sprites.front_default;
-  $pokemonImage.alt = `An image depicting the front part of pokemon ${pokemon.name}`;
-  $pokemonTitle.textContent = pokemon.name;
+  $pokemonImage.alt = `An image depicting the front part of pokemon ${capitalizeFirstLetter(
+    pokemon.name
+  )}`;
+  $pokemonTitle.textContent = `${capitalizeFirstLetter(pokemon.name)}`;
   $pokemonNumber.textContent = `Number: ${pokemon.id}`;
   if (pokemon.types.length === 2) {
-    $pokemonType.textContent = `Type: ${pokemon.types[0].type.name} - ${pokemon.types[1].type.name}`;
+    $pokemonType.textContent = `Type: ${capitalizeFirstLetter(
+      pokemon.types[0].type.name
+    )} - ${capitalizeFirstLetter(pokemon.types[1].type.name)}`;
   } else {
-    $pokemonType.textContent = `Type: ${pokemon.types[0].type.name}`;
+    $pokemonType.textContent = `Type: ${capitalizeFirstLetter(
+      pokemon.types[0].type.name
+    )}`;
   }
 
   $pokemonWeight.textContent = `Weight: ${pokemon.weight}`;
@@ -72,6 +78,11 @@ function createPokemonCard(pokemon) {
   $pokemonCard.appendChild($pokemonCardBody);
 
   return POKEMON_LIST_CONTAINER.appendChild($pokemonCard);
+}
+
+function capitalizeFirstLetter(string) {
+  const newString = string.charAt(0).toUpperCase() + string.slice(1);
+  return newString;
 }
 
 loadPokemonList(POKEMON_LIST_URL);
