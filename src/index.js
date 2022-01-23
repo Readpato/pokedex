@@ -43,7 +43,6 @@ function createPokemonCard(pokemon) {
   const $pokemonDescription = document.createElement("ul");
   $pokemonDescription.classList.add("pokemon-description");
   const $pokemonNumber = document.createElement("li");
-  const $pokemonType = document.createElement("li");
   const $pokemonWeight = document.createElement("li");
   const $pokemonHeight = document.createElement("li");
 
@@ -53,21 +52,11 @@ function createPokemonCard(pokemon) {
   )}`;
   $pokemonTitle.textContent = `${capitalizeFirstLetter(pokemon.name)}`;
   $pokemonNumber.textContent = `Number: ${pokemon.id}`;
-  if (pokemon.types.length === 2) {
-    $pokemonType.textContent = `Type: ${capitalizeFirstLetter(
-      pokemon.types[0].type.name
-    )} - ${capitalizeFirstLetter(pokemon.types[1].type.name)}`;
-  } else {
-    $pokemonType.textContent = `Type: ${capitalizeFirstLetter(
-      pokemon.types[0].type.name
-    )}`;
-  }
-
   $pokemonWeight.textContent = `Weight: ${pokemon.weight}`;
   $pokemonHeight.textContent = `Height: ${pokemon.height}`;
 
   $pokemonDescription.appendChild($pokemonNumber);
-  $pokemonDescription.appendChild($pokemonType);
+  $pokemonDescription.appendChild(assessPokemonTypeQuantity(pokemon.types));
   $pokemonDescription.appendChild($pokemonWeight);
   $pokemonDescription.appendChild($pokemonHeight);
 
@@ -83,6 +72,21 @@ function createPokemonCard(pokemon) {
 function capitalizeFirstLetter(string) {
   const newString = string.charAt(0).toUpperCase() + string.slice(1);
   return newString;
+}
+
+function assessPokemonTypeQuantity(typeQuantity) {
+  const $pokemonType = document.createElement("li");
+  if (typeQuantity.length === 2) {
+    $pokemonType.textContent = `Type: ${capitalizeFirstLetter(
+      typeQuantity[0].type.name
+    )} - ${capitalizeFirstLetter(typeQuantity[1].type.name)}`;
+    return $pokemonType;
+  } else {
+    $pokemonType.textContent = `Type: ${capitalizeFirstLetter(
+      typeQuantity[0].type.name
+    )}`;
+    return $pokemonType;
+  }
 }
 
 loadPokemonList(POKEMON_LIST_URL);
