@@ -1,9 +1,12 @@
 const POKEMON_LIST_URL = "https://pokeapi.co/api/v2/pokemon?limit=10&offset=0";
+const POKEMON_SEARCH_URL = "https://pokeapi.co/api/v2/pokemon/";
+const $pokemonSearchButton = document.querySelector(".pokemon-search-button");
 const $pokemonListContainer = document.querySelector(".pokemon-list-container");
 const $lowerNextButton = document.querySelector(".lower-next-button");
 const $lowerPreviousButton = document.querySelector(".lower-previous-button");
 const $upperNextButton = document.querySelector(".upper-next-button");
 const $upperPreviousButton = document.querySelector(".upper-previous-button");
+const $pokemonSearchInput = document.querySelector(".pokemon-search-input");
 let nextPokemonList;
 let previousPokemonList;
 
@@ -11,7 +14,7 @@ function loadPokemonList(pokeApiURL) {
   return fetch(pokeApiURL)
     .then((api_response) => {
       if (!api_response.ok)
-        return "Something went wrong, please try again later";
+        return "Something went wrong, please try again later.";
       return api_response.json();
     })
     .then((api_responseJSON) => {
@@ -28,7 +31,7 @@ function loadSinglePokemon(pokemonURL) {
   return fetch(pokemonURL)
     .then((api_response) => {
       if (!api_response.ok)
-        return "Something went wrong, please try again later";
+        return "Something went wrong, please try again later.";
       return api_response.json();
     })
     .then((api_responseJSON) => {
@@ -121,6 +124,27 @@ $upperPreviousButton.addEventListener("click", () => {
   // Maybe we can add an alert that says that they are at the begining or the end
   deletePreviousPokemonCards();
   loadPokemonList(previousPokemonList);
+});
+
+function loadSearchBarPokemon(pokemonSearchURL) {
+  return fetch(pokemonSearchURL)
+    .then((api_response) => {
+      if (!api_response.ok)
+        return "Something went wrong, please try again later.";
+      return api_response.json();
+    })
+    .then((api_responseJSON) => {
+      return createPokemonCard(api_responseJSON);
+    })
+    .catch((error) => console.error(error));
+}
+
+$pokemonSearchButton.addEventListener("click", (event) => {
+  let pokemonName = $pokemonSearchInput.value;
+  deletePreviousPokemonCards();
+  loadSearchBarPokemon(`${POKEMON_SEARCH_URL}${pokemonName}`);
+
+  event.preventDefault();
 });
 
 function deletePreviousPokemonCards() {
