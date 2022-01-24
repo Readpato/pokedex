@@ -12,6 +12,15 @@ main {
     padding-left: 1rem;
   }
 
+  .upper-transition-buttons-container {
+    width: 30%;
+    display: none;
+    .upper-previous-button,
+    .upper-next-button {
+      background-color: $button-color;
+      border: none;
+    }
+  }
   .lower-transition-buttons-container {
     width: 30%;
     margin: auto;
@@ -24,14 +33,10 @@ main {
       border: none;
     }
   }
-  .upper-transition-buttons-container {
-    width: 30%;
-    display: none;
-    .upper-previous-button,
-    .upper-next-button {
-      background-color: $button-color;
-      border: none;
-    }
+
+  .homepage-button {
+    background-color: $button-color;
+    border: none;
   }
 
   .pokemon-card:hover {

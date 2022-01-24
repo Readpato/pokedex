@@ -19,6 +19,17 @@ main .pokemon-description {
   padding-left: 1rem;
 }
 
+main .upper-transition-buttons-container {
+  width: 30%;
+  display: none;
+}
+
+main .upper-transition-buttons-container .upper-previous-button,
+main .upper-transition-buttons-container .upper-next-button {
+  background-color: #6adada;
+  border: none;
+}
+
 main .lower-transition-buttons-container {
   width: 30%;
   margin: auto;
@@ -39,13 +50,7 @@ main .lower-transition-buttons-container .lower-next-button {
   border: none;
 }
 
-main .upper-transition-buttons-container {
-  width: 30%;
-  display: none;
-}
-
-main .upper-transition-buttons-container .upper-previous-button,
-main .upper-transition-buttons-container .upper-next-button {
+main .homepage-button {
   background-color: #6adada;
   border: none;
 }
@@ -104,6 +109,10 @@ body {
 
 input[type="search"]::-webkit-search-cancel-button {
   -webkit-appearance: none;
+  display: none;
+}
+
+.hidden {
   display: none;
 }
 /*# sourceMappingURL=style.css.map */

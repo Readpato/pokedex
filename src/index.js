@@ -1,12 +1,13 @@
 const POKEMON_LIST_URL = "https://pokeapi.co/api/v2/pokemon?limit=10&offset=0";
 const POKEMON_SEARCH_URL = "https://pokeapi.co/api/v2/pokemon/";
 const $pokemonSearchButton = document.querySelector(".pokemon-search-button");
+const $pokemonSearchInput = document.querySelector(".pokemon-search-input");
 const $pokemonListContainer = document.querySelector(".pokemon-list-container");
-const $lowerNextButton = document.querySelector(".lower-next-button");
-const $lowerPreviousButton = document.querySelector(".lower-previous-button");
 const $upperNextButton = document.querySelector(".upper-next-button");
 const $upperPreviousButton = document.querySelector(".upper-previous-button");
-const $pokemonSearchInput = document.querySelector(".pokemon-search-input");
+const $lowerNextButton = document.querySelector(".lower-next-button");
+const $lowerPreviousButton = document.querySelector(".lower-previous-button");
+const $homepageButton = document.querySelector(".homepage-button");
 let nextPokemonList;
 let previousPokemonList;
 
@@ -142,9 +143,23 @@ function loadSearchBarPokemon(pokemonSearchURL) {
 $pokemonSearchButton.addEventListener("click", (event) => {
   let pokemonName = $pokemonSearchInput.value;
   deletePreviousPokemonCards();
+  hideElement($lowerNextButton);
+  hideElement($lowerPreviousButton);
+  hideElement($upperNextButton);
+  hideElement($upperPreviousButton);
+  showElement($homepageButton);
   loadSearchBarPokemon(`${POKEMON_SEARCH_URL}${pokemonName}`);
-
   event.preventDefault();
+});
+
+$homepageButton.addEventListener("click", (event) => {
+  deletePreviousPokemonCards();
+  showElement($lowerNextButton);
+  showElement($lowerPreviousButton);
+  showElement($upperNextButton);
+  showElement($upperPreviousButton);
+  hideElement($homepageButton);
+  loadPokemonList(POKEMON_LIST_URL);
 });
 
 function deletePreviousPokemonCards() {
@@ -152,6 +167,14 @@ function deletePreviousPokemonCards() {
   $pokemonCards.forEach((card) => {
     card.remove();
   });
+}
+
+function hideElement(element) {
+  element.classList.add("hidden");
+}
+
+function showElement(element) {
+  element.classList.remove("hidden");
 }
 
 loadPokemonList(POKEMON_LIST_URL);
