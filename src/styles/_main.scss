@@ -2,7 +2,7 @@ main {
   .pokemon-card {
     margin-bottom: 0.25rem;
     width: 14em;
-    background-color: rgba(255, 255, 255, 0.75);
+    background-color: $card-color;
     transition: transform 0.5s ease;
     border-radius: 1rem;
   }
@@ -43,7 +43,7 @@ main {
     transform: scale(0.97);
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 820px) {
     .upper-transition-buttons-container {
       width: 50%;
       display: flex;
@@ -53,7 +53,7 @@ main {
     }
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 820px) {
     .lower-transition-buttons-container {
       width: 50%;
     }
