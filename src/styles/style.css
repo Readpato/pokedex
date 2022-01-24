@@ -57,6 +57,7 @@ main .pokemon-card:hover {
 
 @media screen and (max-width: 768px) {
   main .upper-transition-buttons-container {
+    width: 50%;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -67,6 +68,12 @@ main .pokemon-card:hover {
         -ms-flex-align: center;
             align-items: center;
     margin: auto;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  main .lower-transition-buttons-container {
+    width: 50%;
   }
 }
 

@@ -40,10 +40,17 @@ main {
 
   @media screen and (max-width: 768px) {
     .upper-transition-buttons-container {
+      width: 50%;
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin: auto;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .lower-transition-buttons-container {
+      width: 50%;
     }
   }
 }
