@@ -5,7 +5,7 @@ const $lowerPreviousButton = document.querySelector(".lower-previous-button");
 const $upperNextButton = document.querySelector(".upper-next-button");
 const $upperPreviousButton = document.querySelector(".upper-previous-button");
 let nextPokemonList;
-let previousPokemonList = null;
+let previousPokemonList;
 
 function loadPokemonList(pokeApiURL) {
   return fetch(pokeApiURL)
@@ -16,6 +16,7 @@ function loadPokemonList(pokeApiURL) {
     })
     .then((api_responseJSON) => {
       nextPokemonList = api_responseJSON.next;
+      previousPokemonList = api_responseJSON.previous;
       return api_responseJSON.results.forEach((object) => {
         loadSinglePokemon(object.url);
       });
@@ -94,10 +95,32 @@ function assessPokemonTypeQuantity(typeQuantity) {
   }
 }
 
-loadPokemonList(POKEMON_LIST_URL);
 $lowerNextButton.addEventListener("click", () => {
+  if (nextPokemonList === null) return function () {};
+  // Maybe we can add an alert that says that they are at the begining or the end
   deletePreviousPokemonCards();
   loadPokemonList(nextPokemonList);
+});
+
+$upperNextButton.addEventListener("click", () => {
+  if (nextPokemonList === null) return function () {};
+  // Maybe we can add an alert that says that they are at the begining or the end
+  deletePreviousPokemonCards();
+  loadPokemonList(nextPokemonList);
+});
+
+$lowerPreviousButton.addEventListener("click", () => {
+  if (previousPokemonList === null) return function () {};
+  // Maybe we can add an alert that says that they are at the begining or the end
+  deletePreviousPokemonCards();
+  loadPokemonList(previousPokemonList);
+});
+
+$upperPreviousButton.addEventListener("click", () => {
+  if (previousPokemonList === null) return function () {};
+  // Maybe we can add an alert that says that they are at the begining or the end
+  deletePreviousPokemonCards();
+  loadPokemonList(previousPokemonList);
 });
 
 function deletePreviousPokemonCards() {
@@ -106,3 +129,5 @@ function deletePreviousPokemonCards() {
     card.remove();
   });
 }
+
+loadPokemonList(POKEMON_LIST_URL);
