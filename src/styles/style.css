@@ -5,7 +5,7 @@
 main .pokemon-card {
   margin-bottom: 0.25rem;
   width: 14em;
-  background-color: rgba(255, 255, 255, 0.75);
+  background-color: rgba(255, 255, 255, 0.7);
   -webkit-transition: -webkit-transform 0.5s ease;
   transition: -webkit-transform 0.5s ease;
   transition: transform 0.5s ease;
@@ -26,7 +26,7 @@ main .upper-transition-buttons-container {
 
 main .upper-transition-buttons-container .upper-previous-button,
 main .upper-transition-buttons-container .upper-next-button {
-  background-color: #6adada;
+  background-color: #52cccd;
   border: none;
 }
 
@@ -46,12 +46,12 @@ main .lower-transition-buttons-container {
 
 main .lower-transition-buttons-container .lower-previous-button,
 main .lower-transition-buttons-container .lower-next-button {
-  background-color: #6adada;
+  background-color: #52cccd;
   border: none;
 }
 
 main .homepage-button {
-  background-color: #6adada;
+  background-color: #52cccd;
   border: none;
 }
 
@@ -60,7 +60,7 @@ main .pokemon-card:hover {
           transform: scale(0.97);
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 820px) {
   main .upper-transition-buttons-container {
     width: 50%;
     display: -webkit-box;
@@ -76,7 +76,7 @@ main .pokemon-card:hover {
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 820px) {
   main .lower-transition-buttons-container {
     width: 50%;
   }
