@@ -206,6 +206,7 @@ function loadSearchBarPokemon(pokemonSearchURL) {
 
 $homepageButton.addEventListener("click", (event) => {
   deletePreviousPokemonCards();
+  $pokemonSearchInput.classList.remove("error");
   showElement($lowerNextButton);
   showElement($lowerPreviousButton);
   showElement($upperNextButton);
