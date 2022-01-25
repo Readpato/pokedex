@@ -159,16 +159,8 @@ $pokemonSearchButton.addEventListener("click", (event) => {
 function validateSearchBar(pokemon) {
   const regEx = /^[A-z]+$/;
 
-  if (regEx.test(pokemon) === false) {
-    return "The Pokemon name has invalid characters.";
-  }
-
-  if (pokemon.length === 0) {
-    return "The Pokemon name hasn't been inserted.";
-  }
-  if (pokemon.length >= 12) {
-    return "The Pokemon name is too long.";
-  }
+  if (!regEx.test(pokemon)) return "The Pokemon name has invalid characters.";
+  if (pokemon.length >= 12) return "The Pokemon name is too long.";
 
   return "";
 }
