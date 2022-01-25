@@ -53,6 +53,23 @@ main {
     border: none;
   }
 
+  .homepage-button:hover {
+    background-color: $hover-color;
+  }
+
+  .upper-previous-button:hover {
+    background-color: $hover-color;
+  }
+  .upper-next-button:hover {
+    background-color: $hover-color;
+  }
+  .lower-previous-button:hover {
+    background-color: $hover-color;
+  }
+  .lower-next-button:hover {
+    background-color: $hover-color;
+  }
+
   .pokemon-card:hover {
     transform: scale(0.97);
   }

@@ -72,6 +72,26 @@ main .homepage-button {
   border: none;
 }
 
+main .homepage-button:hover {
+  background-color: #4ad9d9;
+}
+
+main .upper-previous-button:hover {
+  background-color: #4ad9d9;
+}
+
+main .upper-next-button:hover {
+  background-color: #4ad9d9;
+}
+
+main .lower-previous-button:hover {
+  background-color: #4ad9d9;
+}
+
+main .lower-next-button:hover {
+  background-color: #4ad9d9;
+}
+
 main .pokemon-card:hover {
   -webkit-transform: scale(0.97);
           transform: scale(0.97);
