@@ -1,5 +1,7 @@
 const POKEMON_LIST_URL = "https://pokeapi.co/api/v2/pokemon?limit=10&offset=0";
 const POKEMON_SEARCH_URL = "https://pokeapi.co/api/v2/pokemon/";
+const $form = document.querySelector("form");
+const $errorPokemonCard = document.querySelector(".error-pokemon-card");
 const $pokemonSearchButton = document.querySelector(".pokemon-search-button");
 const $pokemonSearchInput = document.querySelector(".pokemon-search-input");
 const $pokemonListContainer = document.querySelector(".pokemon-list-container");
@@ -127,6 +129,68 @@ $upperPreviousButton.addEventListener("click", () => {
   loadPokemonList(previousPokemonList);
 });
 
+$pokemonSearchButton.addEventListener("click", (event) => {
+  validateForm();
+  event.preventDefault();
+});
+
+function validateForm(event) {
+  let pokemonName = $pokemonSearchInput.value.toLowerCase();
+
+  const errors = {
+    "search-bar-input": validateSearchBar(pokemonName),
+  };
+
+  const success = handleErrors(errors) === 0;
+
+  if (success) {
+    deletePreviousPokemonCards();
+    hideElement($lowerNextButton);
+    hideElement($lowerPreviousButton);
+    hideElement($upperNextButton);
+    hideElement($upperPreviousButton);
+    showElement($homepageButton);
+    loadSearchBarPokemon(`${POKEMON_SEARCH_URL}${pokemonName}`);
+  }
+}
+
+function validateSearchBar(pokemon) {
+  const regEx = /^[A-z]+$/;
+
+  if (!regEx.test(pokemon)) return "The Pokemon name has invalid characters.";
+  if (pokemon.length >= 12) return "The Pokemon name is too long.";
+
+  return "";
+}
+
+function handleErrors(errors) {
+  const error = errors;
+  const keys = Object.keys(errors);
+  let errorQuantity = 0;
+
+  keys.forEach(function (key) {
+    if (error[key]) {
+      $form[key].classList.add("error");
+      $form[key].value = "";
+
+      const $errorDescription = document.querySelector(".error-description");
+      $errorDescription.textContent = error[key];
+      deletePreviousPokemonCards();
+      hideElement($lowerPreviousButton);
+      hideElement($lowerNextButton);
+      hideElement($upperPreviousButton);
+      hideElement($upperNextButton);
+      showElement($homepageButton);
+      showElement($errorPokemonCard);
+      errorQuantity++;
+    } else {
+      $form[key].classList.remove("error");
+      hideElement($errorPokemonCard);
+    }
+  });
+  return errorQuantity;
+}
+
 function loadSearchBarPokemon(pokemonSearchURL) {
   return fetch(pokemonSearchURL)
     .then((api_response) => {
@@ -140,31 +204,6 @@ function loadSearchBarPokemon(pokemonSearchURL) {
     .catch((error) => console.error(error));
 }
 
-function validateForm(event) {
-  let pokemonName = $pokemonSearchInput.value.toLowerCase();
-  deletePreviousPokemonCards();
-  hideElement($lowerNextButton);
-  hideElement($lowerPreviousButton);
-  hideElement($upperNextButton);
-  hideElement($upperPreviousButton);
-  showElement($homepageButton);
-  loadSearchBarPokemon(`${POKEMON_SEARCH_URL}${pokemonName}`);
-}
-
-$pokemonSearchButton.addEventListener("click", (event) => {
-  validateForm();
-  event.preventDefault();
-});
-
-function validateSearchBar(pokemon) {
-  const regEx = /^[A-z]+$/;
-
-  if (!regEx.test(pokemon)) return "The Pokemon name has invalid characters.";
-  if (pokemon.length >= 12) return "The Pokemon name is too long.";
-
-  return "";
-}
-
 $homepageButton.addEventListener("click", (event) => {
   deletePreviousPokemonCards();
   showElement($lowerNextButton);
@@ -172,6 +211,7 @@ $homepageButton.addEventListener("click", (event) => {
   showElement($upperNextButton);
   showElement($upperPreviousButton);
   hideElement($homepageButton);
+  hideElement($errorPokemonCard);
   loadPokemonList(POKEMON_LIST_URL);
 });
 

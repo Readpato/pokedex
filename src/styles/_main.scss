@@ -34,12 +34,30 @@ main {
     }
   }
 
+  .error-pokemon-card {
+    margin-bottom: 0.25rem;
+    width: 14em;
+    background-color: $card-color;
+    transition: transform 0.5s ease;
+    border-radius: 1rem;
+  }
+
+  .error-pokemon-description {
+    list-style-image: url("../images/pokeball.svg");
+    text-align: left;
+    padding-left: 1rem;
+  }
+
   .homepage-button {
     background-color: $button-color;
     border: none;
   }
 
   .pokemon-card:hover {
+    transform: scale(0.97);
+  }
+
+  .error-pokemon-card:hover {
     transform: scale(0.97);
   }
 

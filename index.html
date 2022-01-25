@@ -35,6 +35,7 @@
         <form class="d-flex">
           <input
             class="form-control me-2 pokemon-search-input"
+            name="search-bar-input"
             type="search"
             placeholder="Insert Pokemon Name"
             aria-label="Search"
@@ -68,7 +69,22 @@
       </div>
       <div
         class="container mt-2 pokemon-list-container d-flex flex-wrap align-items-center justify-content-evenly flex-grow"
-      ></div>
+      >
+        <div class="mt-5 error-pokemon-card hidden">
+          <img
+            class="card-img-top error-pokemon-card-image"
+            src="src/images/pokemon-silhouette.png"
+            alt="An image depicting the silhouette of a Pokemon."
+          />
+          <div class="card-body">
+            <h5 class="error-pokemon-name">Uh-oh! Error!</h5>
+            <ul class="error-pokemon-description">
+              <li>Number: 404</li>
+              <li class="error-description"></li>
+            </ul>
+          </div>
+        </div>
+      </div>
       <div class="lower-transition-buttons-container mt-2 mb-1">
         <button
           type="button"
