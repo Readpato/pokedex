@@ -50,12 +50,34 @@ main .lower-transition-buttons-container .lower-next-button {
   border: none;
 }
 
+main .error-pokemon-card {
+  margin-bottom: 0.25rem;
+  width: 14em;
+  background-color: rgba(255, 255, 255, 0.7);
+  -webkit-transition: -webkit-transform 0.5s ease;
+  transition: -webkit-transform 0.5s ease;
+  transition: transform 0.5s ease;
+  transition: transform 0.5s ease, -webkit-transform 0.5s ease;
+  border-radius: 1rem;
+}
+
+main .error-pokemon-description {
+  list-style-image: url("../images/pokeball.svg");
+  text-align: left;
+  padding-left: 1rem;
+}
+
 main .homepage-button {
   background-color: #52cccd;
   border: none;
 }
 
 main .pokemon-card:hover {
+  -webkit-transform: scale(0.97);
+          transform: scale(0.97);
+}
+
+main .error-pokemon-card:hover {
   -webkit-transform: scale(0.97);
           transform: scale(0.97);
 }
@@ -110,6 +132,10 @@ body {
 input[type="search"]::-webkit-search-cancel-button {
   -webkit-appearance: none;
   display: none;
+}
+
+.error {
+  border: 1px solid red;
 }
 
 .hidden {

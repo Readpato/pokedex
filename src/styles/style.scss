@@ -31,6 +31,10 @@ input[type="search"]::-webkit-search-cancel-button {
   display: none;
 }
 
+.error {
+  border: 1px solid red;
+}
+
 .hidden {
   display: none;
 }
