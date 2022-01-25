@@ -140,8 +140,8 @@ function loadSearchBarPokemon(pokemonSearchURL) {
     .catch((error) => console.error(error));
 }
 
-$pokemonSearchButton.addEventListener("click", (event) => {
-  let pokemonName = $pokemonSearchInput.value;
+function validateForm(event) {
+  let pokemonName = $pokemonSearchInput.value.toLowerCase();
   deletePreviousPokemonCards();
   hideElement($lowerNextButton);
   hideElement($lowerPreviousButton);
@@ -149,8 +149,29 @@ $pokemonSearchButton.addEventListener("click", (event) => {
   hideElement($upperPreviousButton);
   showElement($homepageButton);
   loadSearchBarPokemon(`${POKEMON_SEARCH_URL}${pokemonName}`);
+}
+
+$pokemonSearchButton.addEventListener("click", (event) => {
+  validateForm();
   event.preventDefault();
 });
+
+function validateSearchBar(pokemon) {
+  const regEx = /^[A-z]+$/;
+
+  if (regEx.test(pokemon) === false) {
+    return "The Pokemon name has invalid characters.";
+  }
+
+  if (pokemon.length === 0) {
+    return "The Pokemon name hasn't been inserted.";
+  }
+  if (pokemon.length >= 12) {
+    return "The Pokemon name is too long.";
+  }
+
+  return "";
+}
 
 $homepageButton.addEventListener("click", (event) => {
   deletePreviousPokemonCards();
