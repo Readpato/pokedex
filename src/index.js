@@ -201,7 +201,10 @@ function loadSearchBarPokemon(pokemonSearchURL) {
     .then((api_responseJSON) => {
       return createPokemonCard(api_responseJSON);
     })
-    .catch((error) => console.error(error));
+    .catch((error) => {
+      console.error(error);
+      return createCatchCardError();
+    });
 }
 
 $homepageButton.addEventListener("click", (event) => {
@@ -215,6 +218,12 @@ $homepageButton.addEventListener("click", (event) => {
   hideElement($errorPokemonCard);
   loadPokemonList(POKEMON_LIST_URL);
 });
+
+function createCatchCardError() {
+  showElement($errorPokemonCard);
+  const $errorDescription = document.querySelector(".error-description");
+  $errorDescription.textContent = "That Pokemon doesn't exist. Try again.";
+}
 
 function deletePreviousPokemonCards() {
   const $pokemonCards = document.querySelectorAll(".pokemon-card");
