@@ -61,4 +61,102 @@ context("Pokedex", () => {
       cy.get(".error-description").should("exist");
     });
   });
+
+  describe("Make sure the functionality of the Pokedex works correctly", () => {
+    it("Load up the Pokedex homepage when clicking on the logo", () => {
+      cy.get(".navbar-brand").click();
+      cy.url().should("include", "http://127.0.0.1:8080");
+      cy.get(".pokemon-card").should("have.length", "10");
+    });
+    it("Make sure the next and previous buttons work correctly in mobile", () => {
+      cy.viewport(375, 667);
+      cy.get(".pokemon-card").should("have.length", "10");
+      let firstPagePokemonNames = [];
+      cy.get(".pokemon-card h5").then((pokemonCardTitle) => {
+        return pokemonCardTitle.each((index, title) => {
+          firstPagePokemonNames.push(title.textContent);
+        });
+      });
+      cy.get(".upper-next-button").should("be.visible").click();
+      cy.get(".pokemon-card").should("have.length", "10");
+      cy.get(".pokemon-card h5")
+        .first()
+        .should((pokemonName) => {
+          expect(firstPagePokemonNames).to.not.include(
+            pokemonName[0].textContent
+          );
+        });
+      cy.get(".upper-previous-button").should("be.visible").click();
+      cy.get(".pokemon-card").should("have.length", "10");
+      cy.get(".pokemon-card h5")
+        .first()
+        .should((pokemonName) => {
+          expect(firstPagePokemonNames).to.include(pokemonName[0].textContent);
+        });
+      cy.get(".pokemon-card").should("have.length", "10");
+      cy.get(".pokemon-card h5").then((pokemonCardTitle) => {
+        return pokemonCardTitle.each((index, title) => {
+          firstPagePokemonNames.push(title.textContent);
+        });
+      });
+      cy.get(".lower-next-button").should("be.visible").click();
+      cy.get(".pokemon-card").should("have.length", "10");
+      cy.get(".pokemon-card h5")
+        .first()
+        .should((pokemonName) => {
+          expect(firstPagePokemonNames).to.not.include(
+            pokemonName[0].textContent
+          );
+        });
+      cy.get(".lower-previous-button").should("be.visible").click();
+      cy.get(".pokemon-card").should("have.length", "10");
+      cy.get(".pokemon-card h5")
+        .first()
+        .should((pokemonName) => {
+          expect(firstPagePokemonNames).to.include(pokemonName[0].textContent);
+        });
+      cy.get(".lower-previous-button").should("be.visible").click();
+      cy.get(".pokemon-card").should("have.length", "10");
+      cy.get(".pokemon-card h5")
+        .first()
+        .should((pokemonName) => {
+          expect(firstPagePokemonNames).to.include(pokemonName[0].textContent);
+        });
+    });
+    it("Make sure the next and previous buttons work correctly in large screens", () => {
+      cy.visit(URL);
+      cy.get(".pokemon-card").should("have.length", "10");
+      cy.get(".upper-next-button").should("not.be.visible");
+      cy.get(".upper-previous-button").should("not.be.visible");
+      let firstPagePokemonNames = [];
+      cy.get(".pokemon-card h5").then((pokemonCardTitle) => {
+        return pokemonCardTitle.each((index, title) => {
+          firstPagePokemonNames.push(title.textContent);
+        });
+      });
+      cy.get(".lower-next-button").should("be.visible").click();
+      cy.get(".pokemon-card").should("have.length", "10");
+      cy.get(".pokemon-card h5")
+        .first()
+        .should((pokemonName) => {
+          expect(firstPagePokemonNames).to.not.include(
+            pokemonName[0].textContent
+          );
+        });
+      cy.get(".lower-previous-button").should("be.visible").click();
+      cy.get(".pokemon-card").should("have.length", "10");
+      cy.get(".pokemon-card h5")
+        .first()
+        .should((pokemonName) => {
+          expect(firstPagePokemonNames).to.include(pokemonName[0].textContent);
+        });
+      cy.get(".lower-previous-button").should("be.visible").click();
+      cy.get(".pokemon-card").should("have.length", "10");
+      cy.get(".pokemon-card h5")
+        .first()
+        .should((pokemonName) => {
+          expect(firstPagePokemonNames).to.include(pokemonName[0].textContent);
+        });
+    });
+  });
 });
