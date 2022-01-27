@@ -38,7 +38,7 @@ The Pokedex is pretty simple to use. Once the main page is loaded, the user will
 - A list of ten Pokemon with a summary about them.
 - Two buttons that allow the cycling between the following and (if possible) the previous Pokemon.
 
-<img  src="main-homepage-img" align="center">
+<img  src="https://github.com/Readpato/pokedex/blob/gh-pages/src/images/readme-images/pokedex-homepage.PNG" align="center">
 
 The navigation bar has two functionalities with its available elements:
 
@@ -46,12 +46,12 @@ The navigation bar has two functionalities with its available elements:
 
 - The search bar allows the user to search by name for a specified Pokemon and it will get in return a card showing a description from that Pokemon.
 
-<img  src="search-bar-result" align="center">
+<img  src="https://github.com/Readpato/pokedex/blob/gh-pages/src/images/readme-images/pokedex-search.PNG" align="center">
 
 The list that first appears in the homepage is the collection of the first ten Pokemon from the first generation.
 If the user desires to circle through the entirety of the Pokemon generations, they can use the "Prev" and "Next" buttons. The former allows the user to circle backwards in the list and the latter allows to get newer Pokemon.
 
-<img  src="next-page-pokemon" align="center">
+<img  src="https://github.com/Readpato/pokedex/blob/gh-pages/src/images/readme-images/pokedex-next-page.PNG" align="center">
 
 Should the user insert in the input:
 
@@ -61,7 +61,7 @@ Should the user insert in the input:
 
 A custom Pokemon card will appear displaying the silhouette of a Pokemon (Who's that Pokemon?) and a short description of the error that has occured.
 
-<img src="error-image" align="center">
+<img src="https://github.com/Readpato/pokedex/blob/gh-pages/src/images/readme-images/pokedex-error.PNG" align="center">
 
 #
 
