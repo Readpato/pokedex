@@ -7,7 +7,7 @@ context("Pokedex", () => {
     cy.visit(URL);
   });
 
-  describe("Layout", () => {
+  describe("Layout Tests", () => {
     it("Make sure the layout has been correctly loaded", () => {
       cy.get(".navbar").should(
         "have.css",
@@ -62,7 +62,7 @@ context("Pokedex", () => {
     });
   });
 
-  describe("Make sure the functionality of the Pokedex works correctly", () => {
+  describe("Functionality Tests", () => {
     it("Load up the Pokedex homepage when clicking on the logo", () => {
       cy.get(".navbar-brand").click();
       cy.url().should("include", "http://127.0.0.1:8080");
@@ -157,6 +157,151 @@ context("Pokedex", () => {
         .should((pokemonName) => {
           expect(firstPagePokemonNames).to.include(pokemonName[0].textContent);
         });
+    });
+    it("Assess that search errors display correctly on large screens", () => {
+      cy.get(".pokemon-search-button").click();
+      cy.get(".pokemon-card").should("not.exist");
+      cy.get(".upper-next-button").should("not.be.visible");
+      cy.get(".upper-previous-button").should("not.be.visible");
+      cy.get(".lower-next-button").should("not.be.visible");
+      cy.get(".lower-previous-button").should("not.be.visible");
+      cy.get(".pokemon-search-input")
+        .should("have.value", "")
+        .and("have.class", "error");
+      cy.get(".error-pokemon-card")
+        .should("be.visible")
+        .and("contain", "Uh-oh! Error!")
+        .and("contain", "Number: 404")
+        .and("contain", "The Pokemon name has invalid characters.");
+      cy.get(".homepage-button").should("be.visible").click();
+      cy.get(".homepage-button").should("not.be.visible");
+      cy.get(".pokemon-card").should("have.length", "10").and("be.visible");
+      cy.get(".lower-next-button").should("be.visible");
+      cy.get(".lower-previous-button").should("be.visible");
+      cy.get(".pokemon-search-input").type("p1k4chu");
+      cy.get(".pokemon-search-button").click();
+      cy.get(".pokemon-card").should("not.exist");
+      cy.get(".upper-next-button").should("not.be.visible");
+      cy.get(".upper-previous-button").should("not.be.visible");
+      cy.get(".lower-next-button").should("not.be.visible");
+      cy.get(".lower-previous-button").should("not.be.visible");
+      cy.get(".error-pokemon-card")
+        .should("be.visible")
+        .and("contain", "Uh-oh! Error!")
+        .and("contain", "Number: 404")
+        .and("contain", "The Pokemon name has invalid characters.");
+      cy.get(".homepage-button").should("be.visible").click();
+      cy.get(".homepage-button").should("not.be.visible");
+      cy.get(".pokemon-card").should("have.length", "10").and("be.visible");
+      cy.get(".lower-next-button").should("be.visible");
+      cy.get(".lower-previous-button").should("be.visible");
+      cy.get(".pokemon-search-input").type("pikachupikachupikachu");
+      cy.get(".pokemon-search-button").click();
+      cy.get(".pokemon-card").should("not.exist");
+      cy.get(".upper-next-button").should("not.be.visible");
+      cy.get(".upper-previous-button").should("not.be.visible");
+      cy.get(".lower-next-button").should("not.be.visible");
+      cy.get(".lower-previous-button").should("not.be.visible");
+      cy.get(".pokemon-search-input")
+        .should("have.value", "")
+        .and("have.class", "error");
+      cy.get(".error-pokemon-card")
+        .should("be.visible")
+        .and("contain", "Uh-oh! Error!")
+        .and("contain", "Number: 404")
+        .and("contain", "The Pokemon name is too long.");
+      cy.get(".homepage-button").should("be.visible").click();
+      cy.get(".homepage-button").should("not.be.visible");
+      cy.get(".pokemon-card").should("have.length", "10").and("be.visible");
+      cy.get(".lower-next-button").should("be.visible");
+      cy.get(".lower-previous-button").should("be.visible");
+      cy.get(".pokemon-search-input").type("notAPokemon");
+      cy.get(".pokemon-search-button").click();
+      cy.get(".pokemon-card").should("not.exist");
+      cy.get(".pokemon-search-input")
+        .should("have.value", "")
+        .and("have.class", "error");
+      cy.get(".error-pokemon-card")
+        .should("be.visible")
+        .and("contain", "Uh-oh! Error!")
+        .and("contain", "Number: 404")
+        .and("contain", "That Pokemon doesn't exist. Try again.");
+    });
+    it("Assess that search errors display correctly on mobile screens", () => {
+      cy.viewport(375, 667);
+      cy.get(".pokemon-search-button").click();
+      cy.get(".pokemon-card").should("not.exist");
+      cy.get(".upper-next-button").should("not.be.visible");
+      cy.get(".upper-previous-button").should("not.be.visible");
+      cy.get(".lower-next-button").should("not.be.visible");
+      cy.get(".lower-previous-button").should("not.be.visible");
+      cy.get(".pokemon-search-input")
+        .should("have.value", "")
+        .and("have.class", "error");
+      cy.get(".error-pokemon-card")
+        .should("be.visible")
+        .and("contain", "Uh-oh! Error!")
+        .and("contain", "Number: 404")
+        .and("contain", "The Pokemon name has invalid characters.");
+      cy.get(".homepage-button").should("be.visible").click();
+      cy.get(".homepage-button").should("not.be.visible");
+      cy.get(".pokemon-card").should("have.length", "10").and("be.visible");
+      cy.get(".upper-next-button").should("be.visible");
+      cy.get(".upper-previous-button").should("be.visible");
+      cy.get(".lower-next-button").should("be.visible");
+      cy.get(".lower-previous-button").should("be.visible");
+      cy.get(".pokemon-search-input").type("p1k4chu");
+      cy.get(".pokemon-search-button").click();
+      cy.get(".pokemon-card").should("not.exist");
+      cy.get(".upper-next-button").should("not.be.visible");
+      cy.get(".upper-previous-button").should("not.be.visible");
+      cy.get(".lower-next-button").should("not.be.visible");
+      cy.get(".lower-previous-button").should("not.be.visible");
+      cy.get(".error-pokemon-card")
+        .should("be.visible")
+        .and("contain", "Uh-oh! Error!")
+        .and("contain", "Number: 404")
+        .and("contain", "The Pokemon name has invalid characters.");
+      cy.get(".homepage-button").should("be.visible").click();
+      cy.get(".homepage-button").should("not.be.visible");
+      cy.get(".pokemon-card").should("have.length", "10").and("be.visible");
+      cy.get(".upper-next-button").should("be.visible");
+      cy.get(".upper-previous-button").should("be.visible");
+      cy.get(".lower-next-button").should("be.visible");
+      cy.get(".lower-previous-button").should("be.visible");
+      cy.get(".pokemon-search-input").type("pikachupikachupikachu");
+      cy.get(".pokemon-search-button").click();
+      cy.get(".pokemon-card").should("not.exist");
+      cy.get(".upper-next-button").should("not.be.visible");
+      cy.get(".upper-previous-button").should("not.be.visible");
+      cy.get(".lower-next-button").should("not.be.visible");
+      cy.get(".lower-previous-button").should("not.be.visible");
+      cy.get(".pokemon-search-input")
+        .should("have.value", "")
+        .and("have.class", "error");
+      cy.get(".error-pokemon-card")
+        .should("be.visible")
+        .and("contain", "Uh-oh! Error!")
+        .and("contain", "Number: 404")
+        .and("contain", "The Pokemon name is too long.");
+      cy.get(".homepage-button").should("be.visible").click();
+      cy.get(".homepage-button").should("not.be.visible");
+      cy.get(".pokemon-card").should("have.length", "10").and("be.visible");
+      cy.get(".upper-next-button").should("be.visible");
+      cy.get(".upper-previous-button").should("be.visible");
+      cy.get(".lower-next-button").should("be.visible");
+      cy.get(".lower-previous-button").should("be.visible");
+      cy.get(".pokemon-search-input").type("notAPokemon");
+      cy.get(".pokemon-search-button").click();
+      cy.get(".pokemon-card").should("not.exist");
+      cy.get(".pokemon-search-input")
+        .should("have.value", "")
+        .and("have.class", "error");
+      cy.get(".error-pokemon-card")
+        .should("be.visible")
+        .and("contain", "Uh-oh! Error!")
+        .and("contain", "Number: 404")
+        .and("contain", "That Pokemon doesn't exist. Try again.");
     });
   });
 });
