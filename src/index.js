@@ -220,6 +220,7 @@ $homepageButton.addEventListener("click", (event) => {
 });
 
 function createCatchCardError() {
+  $pokemonSearchInput.value = "";
   showElement($errorPokemonCard);
   const $errorDescription = document.querySelector(".error-description");
   $errorDescription.textContent = "That Pokemon doesn't exist. Try again.";
