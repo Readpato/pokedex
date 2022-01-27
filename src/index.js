@@ -103,28 +103,24 @@ function assessPokemonTypeQuantity(typeQuantity) {
 
 $lowerNextButton.addEventListener("click", () => {
   if (nextPokemonList === null) return function () {};
-  // Maybe we can add an alert that says that they are at the begining or the end
   deletePreviousPokemonCards();
   loadPokemonList(nextPokemonList);
 });
 
 $upperNextButton.addEventListener("click", () => {
   if (nextPokemonList === null) return function () {};
-  // Maybe we can add an alert that says that they are at the begining or the end
   deletePreviousPokemonCards();
   loadPokemonList(nextPokemonList);
 });
 
 $lowerPreviousButton.addEventListener("click", () => {
   if (previousPokemonList === null) return function () {};
-  // Maybe we can add an alert that says that they are at the begining or the end
   deletePreviousPokemonCards();
   loadPokemonList(previousPokemonList);
 });
 
 $upperPreviousButton.addEventListener("click", () => {
   if (previousPokemonList === null) return function () {};
-  // Maybe we can add an alert that says that they are at the begining or the end
   deletePreviousPokemonCards();
   loadPokemonList(previousPokemonList);
 });
@@ -155,10 +151,18 @@ function validateForm(event) {
 }
 
 function validateSearchBar(pokemon) {
-  const regEx = /^[A-z]+$/;
+  const regEx = /^[a-z]+$/i;
+  const regEx2 = /^[a-z]+-[a-z]+$/i;
+  const regEx3 = /^[a-z]+-[a-z]+-[a-z]+$/i;
 
-  if (!regEx.test(pokemon)) return "The Pokemon name has invalid characters.";
-  if (pokemon.length >= 12) return "The Pokemon name is too long.";
+  if (!regEx.test(pokemon)) {
+    if (!regEx2.test(pokemon)) {
+      if (!regEx3.test(pokemon)) {
+        return "The Pokemon name has invalid characters.";
+      }
+    }
+  }
+  if (pokemon.length >= 30) return "The Pokemon name is too long.";
 
   return "";
 }
