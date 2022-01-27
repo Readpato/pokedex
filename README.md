@@ -4,6 +4,8 @@
 
 Learn more about Pokemon with the Pokedex!
 
+Demo: <a href="https://readpato.github.io/pokedex/index.html">Pokedex</a>
+
 ### Technologies Used
 
 For this project the technologies and tools used were:
