@@ -1,49 +1,39 @@
-const POKEMON_LIST_URL = "https://pokeapi.co/api/v2/pokemon?limit=10&offset=0";
-const POKEMON_SEARCH_URL = "https://pokeapi.co/api/v2/pokemon/";
-const $form = document.querySelector("form");
-const $errorPokemonCard = document.querySelector(".error-pokemon-card");
-const $pokemonSearchButton = document.querySelector(".pokemon-search-button");
-const $pokemonSearchInput = document.querySelector(".pokemon-search-input");
-const $pokemonListContainer = document.querySelector(".pokemon-list-container");
-const $upperNextButton = document.querySelector(".upper-next-button");
-const $upperPreviousButton = document.querySelector(".upper-previous-button");
-const $lowerNextButton = document.querySelector(".lower-next-button");
-const $lowerPreviousButton = document.querySelector(".lower-previous-button");
-const $homepageButton = document.querySelector(".homepage-button");
 let nextPokemonList;
 let previousPokemonList;
 
-function loadPokemonList(pokeApiURL) {
-  return fetch(pokeApiURL)
-    .then((api_response) => {
-      if (!api_response.ok)
-        return "Something went wrong, please try again later.";
-      return api_response.json();
-    })
-    .then((api_responseJSON) => {
-      nextPokemonList = api_responseJSON.next;
-      previousPokemonList = api_responseJSON.previous;
-      return api_responseJSON.results.forEach((object) => {
-        loadSinglePokemon(object.url);
-      });
-    })
-    .catch((error) => console.error(error));
+async function initialize() {
+  const POKEMON_LIST_URL =
+    "https://pokeapi.co/api/v2/pokemon?limit=10&offset=0";
+  const response = await fetch(POKEMON_LIST_URL);
+  const json = await response.json();
+  const { results: results } = json;
+  nextPokemonList = json.next;
+  previousPokemonList = json.previous;
+  return results.forEach((object) => {
+    loadSinglePokemon(object.url);
+  });
+}
+async function loadPokemonList(apiURL) {
+  const response = await fetch(apiURL);
+  const json = await response.json();
+  const { results: results } = json;
+  nextPokemonList = json.next;
+  previousPokemonList = json.previous;
+  return results.forEach((object) => {
+    loadSinglePokemon(object.url);
+  });
 }
 
-function loadSinglePokemon(pokemonURL) {
-  return fetch(pokemonURL)
-    .then((api_response) => {
-      if (!api_response.ok)
-        return "Something went wrong, please try again later.";
-      return api_response.json();
-    })
-    .then((api_responseJSON) => {
-      return createPokemonCard(api_responseJSON);
-    })
-    .catch((error) => console.error(error));
+async function loadSinglePokemon(pokemonURL) {
+  const response = await fetch(pokemonURL);
+  const json = await response.json();
+  return createPokemonCard(json);
 }
 
 function createPokemonCard(pokemon) {
+  const $pokemonListContainer = document.querySelector(
+    ".pokemon-list-container"
+  );
   const $pokemonCard = document.createElement("div");
   $pokemonCard.classList.add("pokemon-card");
   const $pokemonImage = document.createElement("img");
@@ -101,36 +91,48 @@ function assessPokemonTypeQuantity(typeQuantity) {
   }
 }
 
+const $lowerNextButton = document.querySelector(".lower-next-button");
 $lowerNextButton.addEventListener("click", () => {
   if (nextPokemonList === null) return function () {};
   deletePreviousPokemonCards();
   loadPokemonList(nextPokemonList);
 });
 
+const $upperNextButton = document.querySelector(".upper-next-button");
 $upperNextButton.addEventListener("click", () => {
   if (nextPokemonList === null) return function () {};
   deletePreviousPokemonCards();
   loadPokemonList(nextPokemonList);
 });
 
+const $lowerPreviousButton = document.querySelector(".lower-previous-button");
 $lowerPreviousButton.addEventListener("click", () => {
   if (previousPokemonList === null) return function () {};
   deletePreviousPokemonCards();
   loadPokemonList(previousPokemonList);
 });
 
+const $upperPreviousButton = document.querySelector(".upper-previous-button");
 $upperPreviousButton.addEventListener("click", () => {
   if (previousPokemonList === null) return function () {};
   deletePreviousPokemonCards();
   loadPokemonList(previousPokemonList);
 });
 
+const $pokemonSearchButton = document.querySelector(".pokemon-search-button");
 $pokemonSearchButton.addEventListener("click", (event) => {
   validateForm();
   event.preventDefault();
 });
 
 function validateForm(event) {
+  const $pokemonSearchInput = document.querySelector(".pokemon-search-input");
+  const $upperNextButton = document.querySelector(".upper-next-button");
+  const $upperPreviousButton = document.querySelector(".upper-previous-button");
+  const $lowerNextButton = document.querySelector(".lower-next-button");
+  const $lowerPreviousButton = document.querySelector(".lower-previous-button");
+  const $homepageButton = document.querySelector(".homepage-button");
+  const POKEMON_SEARCH_URL = "https://pokeapi.co/api/v2/pokemon/";
   let pokemonName = $pokemonSearchInput.value.toLowerCase();
 
   const errors = {
@@ -168,6 +170,13 @@ function validateSearchBar(pokemon) {
 }
 
 function handleErrors(errors) {
+  const $form = document.querySelector("form");
+  const $errorPokemonCard = document.querySelector(".error-pokemon-card");
+  const $upperNextButton = document.querySelector(".upper-next-button");
+  const $upperPreviousButton = document.querySelector(".upper-previous-button");
+  const $lowerNextButton = document.querySelector(".lower-next-button");
+  const $lowerPreviousButton = document.querySelector(".lower-previous-button");
+  const $homepageButton = document.querySelector(".homepage-button");
   const error = errors;
   const keys = Object.keys(errors);
   let errorQuantity = 0;
@@ -211,7 +220,15 @@ function loadSearchBarPokemon(pokemonSearchURL) {
     });
 }
 
+const $homepageButton = document.querySelector(".homepage-button");
 $homepageButton.addEventListener("click", (event) => {
+  const $errorPokemonCard = document.querySelector(".error-pokemon-card");
+  const $pokemonSearchInput = document.querySelector(".pokemon-search-input");
+  const $upperNextButton = document.querySelector(".upper-next-button");
+  const $upperPreviousButton = document.querySelector(".upper-previous-button");
+  const $lowerNextButton = document.querySelector(".lower-next-button");
+  const $lowerPreviousButton = document.querySelector(".lower-previous-button");
+  const $homepageButton = document.querySelector(".homepage-button");
   deletePreviousPokemonCards();
   $pokemonSearchInput.classList.remove("error");
   showElement($lowerNextButton);
@@ -224,6 +241,8 @@ $homepageButton.addEventListener("click", (event) => {
 });
 
 function createCatchCardError() {
+  const $pokemonSearchInput = document.querySelector(".pokemon-search-input");
+  const $errorPokemonCard = document.querySelector(".error-pokemon-card");
   $pokemonSearchInput.value = "";
   $pokemonSearchInput.classList.add("error");
   showElement($errorPokemonCard);
@@ -246,4 +265,4 @@ function showElement(element) {
   element.classList.remove("hidden");
 }
 
-loadPokemonList(POKEMON_LIST_URL);
+initialize();
