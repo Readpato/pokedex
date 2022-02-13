@@ -2,6 +2,10 @@
   background-color: #f79f9f;
 }
 
+.navigation-bar .pokedex-logo {
+  cursor: pointer;
+}
+
 main .pokemon-card {
   margin-bottom: 0.25rem;
   width: 14em;
@@ -70,6 +74,7 @@ main .error-pokemon-description {
 main .homepage-button {
   background-color: #52cccd;
   border: none;
+  cursor: pointer;
 }
 
 main .homepage-button:hover {

@@ -1,3 +1,7 @@
 .navigation-bar {
   background-color: $navigation-bar-color;
+
+  .pokedex-logo {
+    cursor: pointer;
+  }
 }
