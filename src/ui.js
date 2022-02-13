@@ -41,27 +41,29 @@ export function createPokemonCard(pokemon) {
   return $pokemonListContainer.appendChild($pokemonCard);
 }
 
-export function createCatchCardError() {
+export function createCatchCardError(
+  text = "Something went wrong. Try again in a few moments!"
+) {
   const $pokemonSearchInput = document.querySelector(".pokemon-search-input");
   const $errorPokemonCard = document.querySelector(".error-pokemon-card");
   $pokemonSearchInput.value = "";
   $pokemonSearchInput.classList.add("error");
-  showElement($errorPokemonCard);
   const $errorDescription = document.querySelector(".error-description");
-  $errorDescription.textContent = "That Pokemon doesn't exist. Try again.";
+  $errorDescription.textContent = text;
+  return showElement($errorPokemonCard);
 }
 
 export function deletePreviousPokemonCards() {
   const $pokemonCards = document.querySelectorAll(".pokemon-card");
-  $pokemonCards.forEach((card) => {
+  return $pokemonCards.forEach((card) => {
     card.remove();
   });
 }
 
 export function hideElement(element) {
-  element.classList.add("hidden");
+  return element.classList.add("hidden");
 }
 
 export function showElement(element) {
-  element.classList.remove("hidden");
+  return element.classList.remove("hidden");
 }

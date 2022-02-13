@@ -1,7 +1,7 @@
-import { loadSearchBarPokemon } from "./service.js";
+import { loadSinglePokemon } from "./service.js";
 import { hideElement, showElement, deletePreviousPokemonCards } from "./ui.js";
 
-export function validateForm(event) {
+export function validateForm() {
   const $pokemonSearchInput = document.querySelector(".pokemon-search-input");
   const $upperNextButton = document.querySelector(".upper-next-button");
   const $upperPreviousButton = document.querySelector(".upper-previous-button");
@@ -24,7 +24,7 @@ export function validateForm(event) {
     hideElement($upperNextButton);
     hideElement($upperPreviousButton);
     showElement($homepageButton);
-    loadSearchBarPokemon(`${POKEMON_SEARCH_URL}${pokemonName}`);
+    loadSinglePokemon(`${POKEMON_SEARCH_URL}${pokemonName}`);
   }
 }
 

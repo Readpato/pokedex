@@ -3,7 +3,7 @@ import {
   previousPokemonList,
   loadPokemonList,
 } from "./service.js";
-
+import { validateForm } from "./form-validators.js";
 import { hideElement, showElement, deletePreviousPokemonCards } from "./ui.js";
 
 export function capitalizeFirstLetter(string) {
@@ -56,8 +56,8 @@ $upperPreviousButton.addEventListener("click", () => {
 
 const $pokemonSearchButton = document.querySelector(".pokemon-search-button");
 $pokemonSearchButton.addEventListener("click", (event) => {
-  validateForm();
   event.preventDefault();
+  return validateForm();
 });
 
 const $homepageButton = document.querySelector(".homepage-button");
@@ -79,5 +79,5 @@ $homepageButton.addEventListener("click", (event) => {
   showElement($upperPreviousButton);
   hideElement($homepageButton);
   hideElement($errorPokemonCard);
-  loadPokemonList(POKEMON_LIST_URL);
+  return loadPokemonList(POKEMON_LIST_URL);
 });
