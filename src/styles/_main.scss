@@ -51,6 +51,7 @@ main {
   .homepage-button {
     background-color: $button-color;
     border: none;
+    cursor: pointer;
   }
 
   .homepage-button:hover {
