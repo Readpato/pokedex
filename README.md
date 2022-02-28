@@ -17,6 +17,7 @@ For this project the technologies and tools used were:
 - HTML
 - NPM
 - Cypress
+- API: <a href="https://pokeapi.co/">Link</a>
 
 #
 
